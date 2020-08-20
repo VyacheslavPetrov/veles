@@ -10,7 +10,7 @@
 
 const {getRandomIntInterval} = require('./utils');
 
-const a = getRandomIntInterval(20,69);
+const a = getRandomIntInterval(20, 69);
 let x = Math.floor(a / 10);
 switch (x) {
     case 2:

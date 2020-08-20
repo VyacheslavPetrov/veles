@@ -6,17 +6,20 @@
 , а также количество N этих чисел.
  */
 
-const {getRandomIntInterval} = require('./utils');
+const {getRandomIntInterval} = require('./utils')
 
-let a = getRandomIntInterval(1,10);
-const b = getRandomIntInterval(11,20);
-let n = 0;
-console.log ("a = " + a + " b = " + b);
-for (let i = 0; a <= b; i++ ) {
-    console.log(a);
-    a = a + 1;
-    n++;
+const a = getRandomIntInterval(1,10)
+const b = getRandomIntInterval(11,20)
+
+console.log(`a = ${a}, b = ${b}`)
+
+for (let i = a; i <= b; i++ ) {
+    console.log(i)
 }
-console.log("Количество чисел: " + n);
+
+console.log(`Количество чисел: ${b - a + 1}`)
 
 //time 10min
+
+
+// TODO - KISS, YAGNI

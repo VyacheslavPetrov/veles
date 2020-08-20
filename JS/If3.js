@@ -11,9 +11,9 @@ const {getRandomIntInterval} = require('./utils');
 let x = getRandomIntInterval(-1000,1000);
 console.log ("Дано: " + x)
 
-if ( x > 0 ) {
+if (x > 0) {
     x = x + 1;
-} else if ( x < 0) {
+} else if (x < 0) {
     x = x - 2;
 } else {
     x = 10;

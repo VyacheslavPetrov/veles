@@ -5,11 +5,12 @@
  "A" в "C", "C" в "B", "B" в "A", и вывести новые значения переменных "A", "B", "C".
  */
 
-const {getRandomFloatInterval} = require('./utils'); // Импортируем функции из файла utils.js
+const {getRandomFloatInterval} = require('./utils') // Импортируем функции из файла utils.js
 
-let A = getRandomFloatInterval(-1000, 1000);
-let B = getRandomFloatInterval(-1000, 1000);
-let C = getRandomFloatInterval(-1000, 1000);
+let A = getRandomFloatInterval(-1000, 1000),
+B = getRandomFloatInterval(-1000, 1000),
+C = getRandomFloatInterval(-1000, 1000) // TODO - KISS
+
 console.log(A, B, C);
 
 let d, e, f;

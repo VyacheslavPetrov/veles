@@ -5,9 +5,9 @@
 
 const {getRandomIntInterval} = require('./utils');
 
-const a = getRandomIntInterval(-1000,1000);
-const b = getRandomIntInterval(-1000,1000);
-const c = getRandomIntInterval(-1000,1000);
+const a = getRandomIntInterval(0,3);
+const b = getRandomIntInterval(0,3);
+const c = getRandomIntInterval(0,3);
 
 if (a === b || a === c || c === b) {
     if (a === b && a < c) {

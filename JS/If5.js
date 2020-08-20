@@ -9,35 +9,32 @@ let a = getRandomIntInterval(-1000,1000);
 let b = getRandomIntInterval(-1000,1000);
 let c = getRandomIntInterval(-1000,1000);
 
-let k = 0;
-let z = 0;
-let n = 0;
-if (a > 0 ) {
-    k++;
+let positive = 0;
+let negative = 0;
+
+if (a > 0) {
+    positive++;
 } else if (a < 0 ) {
-    z++;
-} else {
-    n++;
-}
-if (b > 0 ) {
-    k++;
-} else if (b < 0 ) {
-    z++;
-} else {
-    n++;
-}
-if (c > 0 ) {
-    k++;
-} else if (c < 0 ) {
-    z++;
-} else {
-    n++;
+    negative++;
 }
 
-console.log("Среди чисел " + a + " " + b + " " + c + "Положительных: " + k + " , Отрицательных: " + z);
+if (b > 0 ) {
+    positive++;
+} else if (b < 0 ) {
+    negative++;
+}
+
+if (c > 0) {
+    k++;
+} else if (c < 0) {
+    negative++;
+}
+
+console.log("Среди чисел " + a + " " + b + " " + c + "Положительных: " + positive + " , Отрицательных: " + negative);
 
 //time 41min
 
+// TODO - KISS
 
 /* Код до осознания своей глупости:
 if (a !== 0 && b !== 0 && c !== 0) {
