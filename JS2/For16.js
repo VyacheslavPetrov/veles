@@ -3,8 +3,8 @@
 //for16
 //Дано вещественное число A и целое число N (>0). Используя один цикл, вывести все целые степени числа A от 1 до N.
 
-const {getRandomFloatInterval} = require('./utils') // Импортируем функции из файла utils.js
-const {getRandomIntInterval} = require('./utils') // Импортируем функции из файла utils.js
+const {getRandomFloatInterval, getRandomIntInterval} = require('../utils') // KISS, из одного файла - один импорт
+
 
 const A = getRandomFloatInterval(-10, 10),
 N = getRandomIntInterval(1, 10);

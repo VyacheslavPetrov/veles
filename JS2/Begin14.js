@@ -5,7 +5,7 @@
 //ограниченного этой окружностью, учитывая, что L = 2πR, S = π*R^2 .
 // В качестве значения π использовать 3.14.
 
-const {getRandomFloatInterval} = require('./utils') // Импортируем функции из файла utils.js
+const {getRandomFloatInterval} = require('../utils') // Импортируем функции из файла utils.js
 
 const L = getRandomFloatInterval(1,100);
 

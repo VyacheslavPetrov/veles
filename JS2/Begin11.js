@@ -3,10 +3,10 @@
 //begin11
 //Даны два ненулевых числа. Найти сумму, разность, произведение и частное их модулей.
 
-const {getRandomFloatInterval} = require('./utils') // Импортируем функции из файла utils.js
+const {getRandomFloatInterval} = require('../utils') // Импортируем функции из файла utils.js
 
-const a = getRandomFloatInterval(1,100),
-b = getRandomFloatInterval(1, 100);
+const a = getRandomFloatInterval(-100,100),
+b = getRandomFloatInterval(-100, 100); //TODO именно модулей.
 
 console.log(a);
 console.log(b);

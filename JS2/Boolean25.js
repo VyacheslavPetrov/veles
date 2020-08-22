@@ -5,7 +5,7 @@
 //Даны числа x, y. Проверить истинность высказывания:
 // «Точка с координатами (x, y) лежит во второй координатной четверти».
 
-const {getRandomIntInterval} = require('./utils');
+const {getRandomIntInterval} = require('../utils');
 
 const x = getRandomIntInterval(-1000,1000),
 y = getRandomIntInterval(-1000,1000);

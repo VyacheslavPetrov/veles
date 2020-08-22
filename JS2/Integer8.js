@@ -3,7 +3,7 @@
 //Integer8
 //Дано двузначное число. Вывести число, полученное при перестановке цифр исходного числа.
 
-const {getRandomIntInterval} = require('./utils');
+const {getRandomIntInterval} = require('../utils');
 
 const i = getRandomIntInterval(10,99);
 let a = Math.floor(i/10),

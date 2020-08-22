@@ -3,7 +3,7 @@
 //boolean5
 //Даны два целых числа: A, B. Проверить истинность высказывания: «Справедливы неравенства A ≥ 0 или B < −2».
 
-const {getRandomIntInterval} = require('./utils');
+const {getRandomIntInterval} = require('../utils');
 
 const A = getRandomIntInterval(-1000,1000),
 B = getRandomIntInterval(-1000,1000);
