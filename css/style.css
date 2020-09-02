@@ -1485,3 +1485,11 @@ footer {
 }
 */
 
+
+
+.toggle {
+    font-weight: 600;
+    color: #999;
+    background: red;
+}
+
