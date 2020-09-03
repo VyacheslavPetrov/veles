@@ -17,8 +17,8 @@ for(let i = 0; i < N; i++){
 }
 console.log(arr);
 
-let minS = (arr[0].a * arr[0].b),
-    maxS = (arr[0].a * arr[0].b);
+let minS = (arr[0].a * arr[0].b), maxS = (arr[0].a * arr[0].b);
+
 for(let i = 0; i < arr.length; i++){
     if((arr[i].a * arr[i].b) < minS){
         minS = arr[i].a * arr[i].b;

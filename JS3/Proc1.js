@@ -5,11 +5,11 @@
 
 const {getRandomIntInterval} = require('../utils') // Импортируем функции из файла utils.js
 
-const A = getRandomIntInterval(1, 100);
+const A = getRandomIntInterval(1, 5);
 console.log(A);
-let PowerA3 = function (a) {
-    return a * a * a;
-}
+
+const PowerA3 = (a) => a * a * a
+
 console.log(PowerA3(A));
 
 //time 5min
