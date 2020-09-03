@@ -1,52 +1,73 @@
-let arr = [
+const arr = [
 	{id: 1, name: "Anya", description: "description", info1: "info", info2: "info"},
 	{id: 2, name: "Petya", description: "description", info1: "info", info2: "info"},
 	{id: 3, name: "Stepan", description: "description", info1: "info", info2: "info"},
 	{id: 4, name: "Vova", description: "description", info1: "info", info2: "info"}
 ]
 
-let tableBoard = document.querySelector('table');
+const tableBoard = document.querySelector('table');
 
-let basicData = (ars) => {
-	for(i = 0; i < ars.length; i++) {
-		let newRow = document.createElement('tr');
-		let newTableRow = tableBoard.append(newRow);
-		for(key in ars[i]) {
-			let newTD = document.createElement('td');
-			let newRowTD = newRow.append(newTD);
-			newTD.textContent = ars[i][key];
-		}
-		let newTDBtn = document.createElement('td');
-		let newRowTDBtn = newRow.append(newTDBtn);
-		let newBtn = document.createElement('input');
-		newBtn.type = "checkbox";
-		let addBtnInTD = newTDBtn.append(newBtn);
-	}
+const addCheckbox = newRow => {
+    const newTDBtn = document.createElement('td');
+    newRow.append(newTDBtn);
+    const newBtn = document.createElement('input');
+    newBtn.type = "checkbox";
+    newTDBtn.append(newBtn);
 }
+
+const basicData = ars => {
+    ars && ars.length && ars.map((item) => {
+        const newRow = document.createElement('tr');
+        tableBoard.append(newRow);
+        for(let key in item) {
+            const newTD = document.createElement('td');
+            newRow.append(newTD);
+            newTD.textContent = item[key];
+        }
+        addCheckbox(newRow)
+    })
+}
+
 basicData(arr)
 
+/***
+* TODO переименуй в осмысленные константы (const, вместо let), к примеру вместо firstField -> fieldName, а
+*    вместо secondField -> fieldDescription
+***/
 let addBtn = document.querySelector('.btn');
 let firstField = document.querySelector('input:nth-of-type(1)');
 let secondField = document.querySelector('input:nth-of-type(2)');
 let thirdField = document.querySelector('input:nth-of-type(3)');
 let fourthField = document.querySelector('input:nth-of-type(4)');
-let idNumber = document.querySelector('table tr:last-child td:nth-of-type(1)')
-let newArr = [];
+
+
+const fields = document.querySelectorAll('input[type=text]')
+
 /*Не смог придумать ничего умнее.
 Иначе последний id у массива тоже менялся из-за наследования*/
-let obj = {id: idNumber.textContent}; 
 
-
-addBtn.onclick = (e) => {
+const addData = e => {
 	e.preventDefault();
-	newArr = [{id: ++obj.id, name: firstField.value, description: secondField.value, info1: thirdField.value, info2: fourthField.value}];
-	basicData(newArr);
-	firstField.value = '';
-	secondField.value = '';
-	firstField.value = '';
-	thirdField.value = '';
-	fourthField.value = '';
+	if(!firstField.value || !secondField.value || !thirdField.value || !fourthField.value){
+	    alert("Заполните все поля!")
+	    return false
+    }
+
+    const idNumber = document.querySelector('table tr:last-child td:nth-of-type(1)')
+	const newObj = {id: parseInt(idNumber.textContent) + 1}
+    for(let i = 0; i < fields.length; i++){
+        newObj[fields[i].name] = fields[i].value
+    }
+    basicData([newObj]);
+
+    for(let i = 0; i < fields.length; i++){
+        fields[i].value = '';
+    }
 }
+
+addBtn.addEventListener("click", addData)
+
+
 
 //time 4ч
 
