@@ -16,9 +16,11 @@ const addCheckbox = newRow => {
 }
 
 const basicData = ars => {
+	const newTbody = document.createElement('tbody')
+	tableBoard.append(newTbody)
     ars && ars.length && ars.map((item) => {
         const newRow = document.createElement('tr');
-        tableBoard.append(newRow);
+        newTbody.append(newRow);
         for(let key in item) {
             const newTD = document.createElement('td');
             newRow.append(newTD);
@@ -59,7 +61,8 @@ const addData = e => {
         newObj[fields[i].name] = fields[i].value
     }
     arr.push(newObj);
-    basicData(arr.slice(-1));
+    document.querySelector('tbody').remove();
+    basicData(arr);
 
     for(let i = 0; i < fields.length; i++){
         fields[i].value = '';
@@ -77,17 +80,24 @@ const sortById = () => {
 	arr.sort((a, b) => a.id > b.id ? 1 : -1);
 }
 const sortByName = () => {
+	document.querySelector('tbody').remove();
 	arr.sort((a, b) => a.name > b.name ? 1 : -1);
-	
+	basicData(arr);
 }
 const sortByDescription = () => {
+	document.querySelector('tbody').remove();
 	arr.sort((a, b) => a.description > b.description ? 1 : -1);
+	basicData(arr);
 }
 const sortByInfo1 = () => {
+	document.querySelector('tbody').remove();
 	arr.sort((a, b) => a.info1 > b.info1 ? 1 : -1);
+	basicData(arr);
 }
 const sortByInfo2 = () => {
+	document.querySelector('tbody').remove();
 	arr.sort((a, b) => a.info2 > b.info2 ? 1 : -1);
+	basicData(arr);
 }
 sortId.addEventListener("click", sortById);
 sortName.addEventListener("click", sortByName);
