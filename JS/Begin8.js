@@ -3,7 +3,7 @@
 // Begin8
 // Даны два числа a и b. Найти их среднее арифметическое: "(a + b)/2"
 
-const {getRandomFloatInterval} = require('./utils') // Импортируем функции из файла utils.js
+const {getRandomFloatInterval} = require('../utils') // Импортируем функции из файла utils.js
 
 const a = getRandomFloatInterval(-1000, 1000), b = getRandomFloatInterval(-1000, 1000)
 
