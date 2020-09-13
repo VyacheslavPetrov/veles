@@ -1,9 +1,13 @@
-const arr = [
-	{id: 1, name: "Anya", description: "description", info1: "info", info2: "info"},
-	{id: 2, name: "Petya", description: "description", info1: "info", info2: "info"},
-	{id: 3, name: "Stepan", description: "description", info1: "info", info2: "info"},
-	{id: 4, name: "Vova", description: "description", info1: "info", info2: "info"}
-]
+let arr;
+
+fetch('https://gist.githubusercontent.com/Greyewi/9929061c594ef7a689d21e5c72c96f3b/raw/9bbd165457d19c5f260e88287a66ffc21b0f0edf/initial_Table.json')
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+        arr = data;
+        basicData(arr)
+    });
 
 //Переменные
 const addBtn = document.querySelector('.btn');
@@ -11,12 +15,13 @@ const fieldName = document.querySelector('input:nth-of-type(1)');
 const fieldDescription = document.querySelector('input:nth-of-type(2)');
 const fieldInfo1 = document.querySelector('input:nth-of-type(3)');
 const fieldInfo2 = document.querySelector('input:nth-of-type(4)');
-const fields = document.querySelectorAll('input[type=text]')
-const sortId = document.querySelector('.id');
-const sortName = document.querySelector('.name');
-const sortDescription = document.querySelector('.description');
-const sortInfo1 = document.querySelector('.info1');
-const sortInfo2 = document.querySelector('.info2');
+const fields = document.querySelectorAll('.add input[type=text]');
+const AllTh = document.querySelectorAll('th');
+
+const findFromTable = document.querySelector('.find');
+
+
+
 
 //Добавление Чекбокса
 const addCheckbox = newRow => {
@@ -48,7 +53,6 @@ const basicData = ars => {
     })
 }
 
-basicData(arr)
 
 
 //Добавление новой строки в таблицу
@@ -89,9 +93,66 @@ const sortDegrease = (field, fieldName) => {
     field.querySelector(".degrease").style.display = "none"
 }
 
+//Поиск
+
+/*findFromTable.addEventListener("input",() => {
+    const sortArr = [];
+    const AllTd = document.querySelectorAll('td');
+    for(let i = 1; j < table.rows.length; i++){
+        for(let j = table.rows[j].cells.length - 1; j >= 0; j--){
+
+        }
+    }
+    basicData(sortArr)
+}
+)
+*/
+
+//Честно украдено :-(
+function tableSearch() {
+    let phrase = document.querySelector('.find');
+    let table = document.querySelector('.info-table');
+    let regPhrase = new RegExp(phrase.value, 'i');
+    let flag = false;
+    for (var i = 1; i < table.rows.length; i++) {
+        flag = false;
+        for (var j = table.rows[i].cells.length - 1; j >= 0; j--) {
+            flag = regPhrase.test(table.rows[i].cells[j].innerHTML);
+            if (flag) break;
+        }
+        if (flag) {
+            table.rows[i].style.display = "";
+        } else {
+            table.rows[i].style.display = "none";
+        }
+
+    }
+}
+
+
+
 //Событие добавление строки 
 addBtn.addEventListener("click", addData)
 //События сортировки
+const sortByIncreace = () => {
+    for(let i = 0; i < AllTh.length - 1; i++){
+        AllTh[i].querySelector(".increase").addEventListener("click",() => sortIncrease(AllTh[i], AllTh.i));
+    }
+}
+
+const sortByDegrease = () => {
+    for(let i = 0; i < AllTh.length - 1; i++){
+        AllTh[i].querySelector(".degrease").addEventListener("click", () => sortIncrease(AllTh[i], AllTh.i));
+    }
+}
+sortByIncreace();
+sortByDegrease();
+
+//Событие поиска
+findFromTable.addEventListener("keyup",tableSearch)
+
+
+/*
 sortId.querySelector(".increase").addEventListener("click", () => sortIncrease(sortId, 'id'));
 sortId.querySelector(".degrease").addEventListener("click", () => sortDegrease(sortId, 'id'));
 sortName.querySelector(".increase").addEventListener("click", () => sortIncrease(sortName, 'name'));
@@ -103,6 +164,5 @@ sortInfo1.querySelector(".degrease").addEventListener("click", () => sortDegreas
 sortInfo2.querySelector(".increase").addEventListener("click", () => sortIncrease(sortInfo2, 'info2'));
 sortInfo2.querySelector(".degrease").addEventListener("click", () => sortDegrease(sortInfo2, 'info2'));
 
+*/
 
-
-//time 4ч
