@@ -1,6 +1,6 @@
 let arr;
 
-fetch('https://gist.githubusercontent.com/Greyewi/9929061c594ef7a689d21e5c72c96f3b/raw/9bbd165457d19c5f260e88287a66ffc21b0f0edf/initial_Table.json')
+fetch('https://gist.githubusercontent.com/Greyewi/9929061c594ef7a689d21e5c72c96f3b/raw/4fec16d39b4a30d4a467dd895a4d3084b6c9c64b/initial_Table.json')
     .then((response) => {
         return response.json();
     })
@@ -21,15 +21,14 @@ const AllTh = document.querySelectorAll('th');
 const findFromTable = document.querySelector('.find');
 
 
-
-
-//Добавление Чекбокса
-const addCheckbox = newRow => {
-    const newTDBtn = document.createElement('td');
-    newRow.append(newTDBtn);
-    const newBtn = document.createElement('input');
-    newBtn.type = "checkbox";
-    newTDBtn.append(newBtn);
+// Меняем поле checked с false на true
+const handleCheck = (arrayNumber) => {
+    arr.map((item, key) => {
+        if(key === arrayNumber) {
+            item.isChecked = !item.isChecked
+        }
+    })
+    console.log(arr.filter(f => f.isChecked))
 }
 
 //Заполение таблицы из массива
@@ -41,15 +40,25 @@ const basicData = ars => {
         TRS && TRS.length > 0 && TRS[trI].remove()
     }
 
-    ars && ars.length && ars.map((item) => {
+    ars && ars.length && ars.map((item, arrayNumber) => {
+
         const newRow = document.createElement('tr');
         newTbody.append(newRow);
         for(let key in item) {
-            const newTD = document.createElement('td');
-            newRow.append(newTD);
-            newTD.textContent = item[key];
+            if( key === 'isChecked') {
+                const newTD = document.createElement('td');
+                const newBtn = document.createElement('input');
+                newBtn.type = "checkbox";
+                newBtn.onclick = () => handleCheck(arrayNumber)
+                newTD.append(newBtn);
+                newRow.append(newTD);
+            } else {
+                const newTD = document.createElement('td');
+                newRow.append(newTD);
+                newTD.textContent = item[key];
+            }
+
         }
-        addCheckbox(newRow)
     })
 }
 
@@ -109,48 +118,52 @@ const sortDegrease = (field, fieldName) => {
 */
 
 //Честно украдено :-(
-function tableSearch() {
-    let phrase = document.querySelector('.find');
-    let table = document.querySelector('.info-table');
-    let regPhrase = new RegExp(phrase.value, 'i');
-    let flag = false;
-    for (var i = 1; i < table.rows.length; i++) {
-        flag = false;
-        for (var j = table.rows[i].cells.length - 1; j >= 0; j--) {
-            flag = regPhrase.test(table.rows[i].cells[j].innerHTML);
-            if (flag) break;
-        }
-        if (flag) {
-            table.rows[i].style.display = "";
-        } else {
-            table.rows[i].style.display = "none";
-        }
+// function tableSearch() {
+//     let phrase = document.querySelector('.find');
+//     let table = document.querySelector('.info-table');
+//     let regPhrase = new RegExp(phrase.value, 'i');
+//     let flag = false;
+//     for (var i = 1; i < table.rows.length; i++) {
+//         flag = false;
+//         for (var j = table.rows[i].cells.length - 1; j >= 0; j--) {
+//             flag = regPhrase.test(table.rows[i].cells[j].innerHTML);
+//             if (flag) break;
+//         }
+//         if (flag) {
+//             table.rows[i].style.display = "";
+//         } else {
+//             table.rows[i].style.display = "none";
+//         }
+//
+//     }
+// }
 
-    }
+const tableSearch = (value) => {
+    let newArr = []
+    arr.filter(f => f['name'].indexOf(value) !== -1)
+    basicData(newArr);
 }
 
-
-
 //Событие добавление строки 
-addBtn.addEventListener("click", addData)
+
 //События сортировки
-const sortByIncreace = () => {
+const addSortByIncreaceListeners = () => {
     for(let i = 0; i < AllTh.length - 1; i++){
         AllTh[i].querySelector(".increase").addEventListener("click",() => sortIncrease(AllTh[i], AllTh.i));
     }
 }
 
-const sortByDegrease = () => {
+const addSortByDegreaseListeners = () => {
     for(let i = 0; i < AllTh.length - 1; i++){
-        AllTh[i].querySelector(".degrease").addEventListener("click", () => sortIncrease(AllTh[i], AllTh.i));
+        AllTh[i].querySelector(".degrease").addEventListener("click", () => sortDegrease(AllTh[i], AllTh.i));
     }
 }
-sortByIncreace();
-sortByDegrease();
+addSortByIncreaceListeners()
+addSortByDegreaseListeners()
 
 //Событие поиска
-findFromTable.addEventListener("keyup",tableSearch)
-
+findFromTable.addEventListener("keyup", e => tableSearch(e.target.value))
+addBtn.addEventListener("click", addData)
 
 /*
 sortId.querySelector(".increase").addEventListener("click", () => sortIncrease(sortId, 'id'));
