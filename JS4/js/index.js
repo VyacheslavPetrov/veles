@@ -19,13 +19,25 @@ const fields = document.querySelectorAll('.add input[type=text]');
 const AllTh = document.querySelectorAll('th');
 
 const findFromTable = document.querySelector('.find');
+const buttonDelete = document.querySelector('.del');
+const buttonEdit = document.querySelector('.edit');
 
-
-// Меняем поле checked с false на true
+// Меняем поле checked с false на true + активация кнопки "Удалить"
 const handleCheck = (arrayNumber) => {
+    let numberChecks = 0;
     arr.map((item, key) => {
         if(key === arrayNumber) {
             item.isChecked = !item.isChecked
+        }
+        if(item.isChecked){
+            numberChecks++;
+        }
+        if(numberChecks > 0){
+            buttonDelete.disabled = false;
+            buttonEdit.disabled = false;
+        } else {
+            buttonDelete.disabled = true;
+            buttonEdit.disabled = true;
         }
     })
     console.log(arr.filter(f => f.isChecked))
@@ -77,6 +89,7 @@ const addData = e => {
     for(let i = 0; i < fields.length; i++){
         newObj[fields[i].name] = fields[i].value
     }
+    newObj.isChecked = false;
     arr.push(newObj);
     basicData(arr);
 
@@ -102,7 +115,32 @@ const sortDegrease = (field, fieldName) => {
     field.querySelector(".degrease").style.display = "none"
 }
 
-//Поиск
+//Удаление ряда
+const deleteRow = () => {
+    for(let i = 0; i < arr.length; i++){
+        if(arr[i].isChecked){
+            arr.splice(i, 1);
+        }
+    }
+    basicData(arr);
+}
+
+//Редактирование ряда
+
+const editRow = () => {
+    const tdAll = document.querySelectorAll("td")
+    for(let i = 0; i , tdAll.length; i++){
+        let input = document.createElement("input");
+        input.value = tdAll[i].innerHTML;
+        tdAll[i].innerHTML = '';
+        tdAll[i].append(input);
+
+        input.addEventListener("blur", () => {
+            tdAll[i].innerHTML = input.value;
+        })
+    }
+}
+buttonEdit.addEventListener("click", editRow);
 
 /*findFromTable.addEventListener("input",() => {
     const sortArr = [];
@@ -144,7 +182,7 @@ const tableSearch = (value) => {
     basicData(newArr);
 }
 
-//Событие добавление строки 
+//
 
 //События сортировки
 const addSortByIncreaceListeners = () => {
@@ -164,6 +202,10 @@ addSortByDegreaseListeners()
 //Событие поиска
 findFromTable.addEventListener("keyup", e => tableSearch(e.target.value))
 addBtn.addEventListener("click", addData)
+
+//Событие удаления ряда
+buttonDelete.addEventListener("click", deleteRow);
+
 
 /*
 sortId.querySelector(".increase").addEventListener("click", () => sortIncrease(sortId, 'id'));
