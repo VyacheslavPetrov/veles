@@ -1,13 +1,14 @@
 let arr;
 
-fetch('https://gist.githubusercontent.com/Greyewi/9929061c594ef7a689d21e5c72c96f3b/raw/4fec16d39b4a30d4a467dd895a4d3084b6c9c64b/initial_Table.json')
-    .then((response) => {
-        return response.json();
-    })
-    .then((data) => {
-        arr = data;
-        basicData(arr)
-    });
+// fetch('https://gist.githubusercontent.com/Greyewi/9929061c594ef7a689d21e5c72c96f3b/raw/4fec16d39b4a30d4a467dd895a4d3084b6c9c64b/initial_Table.json')
+//     .then((response) => {
+//         return response.json();
+//     })
+//     .then((data) => {
+//         arr = data;
+//         basicData(arr)
+//     });
+
 
 //Переменные
 const addBtn = document.querySelector('.btn');
@@ -33,6 +34,7 @@ const handleCheck = (arrayNumber) => {
 
 //Заполение таблицы из массива
 const basicData = ars => {
+    localStorage.setItem("list", JSON.stringify(ars))
 	const newTbody = document.querySelector('tbody')
     const TRS = newTbody.querySelectorAll("tr")
 
@@ -62,7 +64,10 @@ const basicData = ars => {
     })
 }
 
-
+if(localStorage.list){
+    arr = JSON.parse(localStorage.list)
+    basicData(arr)
+}
 
 //Добавление новой строки в таблицу
 const addData = e => {
@@ -77,6 +82,7 @@ const addData = e => {
     for(let i = 0; i < fields.length; i++){
         newObj[fields[i].name] = fields[i].value
     }
+    newObj['isChecked'] = false
     arr.push(newObj);
     basicData(arr);
 
