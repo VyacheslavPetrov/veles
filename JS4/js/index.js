@@ -123,7 +123,6 @@ const sortDegrease = (field, fieldName) => {
 //Удаление ряда
 const deleteRow = () => {
     const newArr = arr.filter(f => (f.isChecked !== true));
-
     basicData(newArr);
 }
 
@@ -131,6 +130,12 @@ const deleteRow = () => {
 const editRow = () => {
     for (let i = 0; i < arr.length; i++){
         if(arr[i].isChecked == true){
+
+            Object.keys(arr[i]).map((obj, key) => {
+                console.log(arr[i][obj])
+            })
+
+
             const allTd = document.querySelectorAll('td');
             for(let j = (6 * i); j <= ((i + 1) * 6 - 2); j ++){
                 let input = document.createElement("input");
@@ -139,7 +144,7 @@ const editRow = () => {
                 allTd[j].append(input);
 
                 input.addEventListener("blur", () => {
-                    allTd[j].innerHTML = input.value;
+                    allTd[j].innerHTML = input.value; // не правильно
                 })
             }
         }
