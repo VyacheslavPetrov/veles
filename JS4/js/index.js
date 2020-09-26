@@ -20,13 +20,25 @@ const fields = document.querySelectorAll('.add input[type=text]');
 const AllTh = document.querySelectorAll('th');
 
 const findFromTable = document.querySelector('.find');
+const buttonDelete = document.querySelector('.del');
+const buttonEdit = document.querySelector('.edit');
 
-
-// Меняем поле checked с false на true
+// Меняем поле checked с false на true + активация кнопки "Удалить"
 const handleCheck = (arrayNumber) => {
+    let numberChecks = 0;
     arr.map((item, key) => {
         if(key === arrayNumber) {
             item.isChecked = !item.isChecked
+        }
+        if(item.isChecked){
+            numberChecks++;
+        }
+        if(numberChecks > 0){
+            buttonDelete.disabled = false;
+            buttonEdit.disabled = false;
+        } else {
+            buttonDelete.disabled = true;
+            buttonEdit.disabled = true;
         }
     })
     console.log(arr.filter(f => f.isChecked))
@@ -82,7 +94,7 @@ const addData = e => {
     for(let i = 0; i < fields.length; i++){
         newObj[fields[i].name] = fields[i].value
     }
-    newObj['isChecked'] = false
+    newObj.isChecked = false;
     arr.push(newObj);
     basicData(arr);
 
@@ -108,49 +120,59 @@ const sortDegrease = (field, fieldName) => {
     field.querySelector(".degrease").style.display = "none"
 }
 
-//Поиск
+//Удаление ряда
+const deleteRow = () => {
+    const newArr = arr.filter(f => (f.isChecked !== true));
 
-/*findFromTable.addEventListener("input",() => {
-    const sortArr = [];
-    const AllTd = document.querySelectorAll('td');
-    for(let i = 1; j < table.rows.length; i++){
-        for(let j = table.rows[j].cells.length - 1; j >= 0; j--){
-
-        }
-    }
-    basicData(sortArr)
-}
-)
-*/
-
-//Честно украдено :-(
-// function tableSearch() {
-//     let phrase = document.querySelector('.find');
-//     let table = document.querySelector('.info-table');
-//     let regPhrase = new RegExp(phrase.value, 'i');
-//     let flag = false;
-//     for (var i = 1; i < table.rows.length; i++) {
-//         flag = false;
-//         for (var j = table.rows[i].cells.length - 1; j >= 0; j--) {
-//             flag = regPhrase.test(table.rows[i].cells[j].innerHTML);
-//             if (flag) break;
-//         }
-//         if (flag) {
-//             table.rows[i].style.display = "";
-//         } else {
-//             table.rows[i].style.display = "none";
-//         }
-//
-//     }
-// }
-
-const tableSearch = (value) => {
-    let newArr = []
-    arr.filter(f => f['name'].indexOf(value) !== -1)
     basicData(newArr);
 }
 
-//Событие добавление строки 
+//Редактирование ряда
+const editRow = () => {
+    for (let i = 0; i < arr.length; i++){
+        if(arr[i].isChecked == true){
+            const allTd = document.querySelectorAll('td');
+            for(let j = (6 * i); j <= ((i + 1) * 6 - 2); j ++){
+                let input = document.createElement("input");
+                input.value = allTd[j].innerHTML;
+                allTd[j].innerHTML = '';
+                allTd[j].append(input);
+
+                input.addEventListener("blur", () => {
+                    allTd[j].innerHTML = input.value;
+                })
+            }
+        }
+    }
+}
+
+function tableSearch() {
+    let phrase = document.querySelector('.find');
+    let table = document.querySelector('.info-table');
+    let regPhrase = new RegExp(phrase.value, 'i');
+    let flag = false;
+    for (var i = 1; i < table.rows.length; i++) {
+       flag = false;
+       for (var j = table.rows[i].cells.length - 1; j >= 0; j--) {
+           flag = regPhrase.test(table.rows[i].cells[j].innerHTML);
+           if (flag) break;
+       }
+       if (flag) {
+           table.rows[i].style.display = "";
+       } else {
+           table.rows[i].style.display = "none";
+       }
+
+   }
+}
+
+/*const tableSearch = (value) => {
+    let newArr = []
+    arr.filter(f => f['name'].indexOf(value) !== -1)
+    basicData(newArr);
+}*/
+
+//
 
 //События сортировки
 const addSortByIncreaceListeners = () => {
@@ -171,17 +193,8 @@ addSortByDegreaseListeners()
 findFromTable.addEventListener("keyup", e => tableSearch(e.target.value))
 addBtn.addEventListener("click", addData)
 
-/*
-sortId.querySelector(".increase").addEventListener("click", () => sortIncrease(sortId, 'id'));
-sortId.querySelector(".degrease").addEventListener("click", () => sortDegrease(sortId, 'id'));
-sortName.querySelector(".increase").addEventListener("click", () => sortIncrease(sortName, 'name'));
-sortName.querySelector(".degrease").addEventListener("click", () => sortDegrease(sortName, 'name'));
-sortDescription.querySelector(".increase").addEventListener("click", () => sortIncrease(sortDescription, 'description'));
-sortDescription.querySelector(".degrease").addEventListener("click", () => sortDegrease(sortDescription, 'description'));
-sortInfo1.querySelector(".increase").addEventListener("click", () => sortIncrease(sortInfo1, 'info1'));
-sortInfo1.querySelector(".degrease").addEventListener("click", () => sortDegrease(sortInfo1, 'info1'));
-sortInfo2.querySelector(".increase").addEventListener("click", () => sortIncrease(sortInfo2, 'info2'));
-sortInfo2.querySelector(".degrease").addEventListener("click", () => sortDegrease(sortInfo2, 'info2'));
+//Событие удаления ряда
+buttonDelete.addEventListener("click", deleteRow);
 
-*/
-
+// Событие редактирования ряда
+buttonEdit.addEventListener("click", editRow);
