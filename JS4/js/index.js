@@ -1,13 +1,14 @@
 let arr;
 
-fetch('https://gist.githubusercontent.com/Greyewi/9929061c594ef7a689d21e5c72c96f3b/raw/4fec16d39b4a30d4a467dd895a4d3084b6c9c64b/initial_Table.json')
-    .then((response) => {
-        return response.json();
-    })
-    .then((data) => {
-        arr = data;
-        basicData(arr)
-    });
+// fetch('https://gist.githubusercontent.com/Greyewi/9929061c594ef7a689d21e5c72c96f3b/raw/4fec16d39b4a30d4a467dd895a4d3084b6c9c64b/initial_Table.json')
+//     .then((response) => {
+//         return response.json();
+//     })
+//     .then((data) => {
+//         arr = data;
+//         basicData(arr)
+//     });
+
 
 
 //Переменные
@@ -48,7 +49,9 @@ const handleCheck = (arrayNumber) => {
 //Заполение таблицы из массива
 const basicData = ars => {
     localStorage.setItem("list", JSON.stringify(ars))
+
     const newTbody = document.querySelector('tbody')
+
     const TRS = newTbody.querySelectorAll("tr")
 
     for(let trI = 0; trI < TRS.length; trI++){
@@ -135,6 +138,7 @@ const editRow = () => {
         const tdAll = document.querySelectorAll('td');
         let newObj = {id: '', name: '', description: '', info1: '', info2: ''};
         if(arr[i].isChecked == true){
+<<<<<<< HEAD
             for(j = i * 6; j <= 6 * i + 4; j ++){
                 let input = document.createElement("input");
                 input.value = tdAll[j].innerHTML;
@@ -145,6 +149,24 @@ const editRow = () => {
                     }
                 
                 arr[i] = newObj
+=======
+
+            Object.keys(arr[i]).map((obj, key) => {
+                console.log(arr[i][obj])
+            })
+
+
+            const allTd = document.querySelectorAll('td');
+            for(let j = (6 * i); j <= ((i + 1) * 6 - 2); j ++){
+                let input = document.createElement("input");
+                input.value = allTd[j].innerHTML;
+                allTd[j].innerHTML = '';
+                allTd[j].append(input);
+
+                input.addEventListener("blur", () => {
+                    allTd[j].innerHTML = input.value; // не правильно
+                })
+>>>>>>> e54295382ca83180c05ce6025b4918448b93ec0c
             }
             //Object.keys(arr[i]).map((obj, key) => {
             //    console.log(arr[i][obj])
