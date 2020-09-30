@@ -9,6 +9,7 @@ fetch('https://gist.githubusercontent.com/Greyewi/9929061c594ef7a689d21e5c72c96f
         basicData(arr)
     });
 
+
 //Переменные
 const addBtn = document.querySelector('.btn');
 const fieldName = document.querySelector('input:nth-of-type(1)');
@@ -21,6 +22,7 @@ const AllTh = document.querySelectorAll('th');
 const findFromTable = document.querySelector('.find');
 const buttonDelete = document.querySelector('.del');
 const buttonEdit = document.querySelector('.edit');
+const buttonSave = document.querySelector('.save');
 
 // Меняем поле checked с false на true + активация кнопки "Удалить"
 const handleCheck = (arrayNumber) => {
@@ -45,7 +47,8 @@ const handleCheck = (arrayNumber) => {
 
 //Заполение таблицы из массива
 const basicData = ars => {
-	const newTbody = document.querySelector('tbody')
+    localStorage.setItem("list", JSON.stringify(ars))
+    const newTbody = document.querySelector('tbody')
     const TRS = newTbody.querySelectorAll("tr")
 
     for(let trI = 0; trI < TRS.length; trI++){
@@ -74,18 +77,21 @@ const basicData = ars => {
     })
 }
 
-
+if(localStorage.list){
+    arr = JSON.parse(localStorage.list)
+    basicData(arr)
+}
 
 //Добавление новой строки в таблицу
 const addData = e => {
-	e.preventDefault();
-	if(!fieldName.value || !fieldDescription.value || !fieldInfo1.value || !fieldInfo2.value){
-	    alert("Заполните все поля!")
-	    return false
+    e.preventDefault();
+    if(!fieldName.value || !fieldDescription.value || !fieldInfo1.value || !fieldInfo2.value){
+        alert("Заполните все поля!")
+        return false
     }
 
     const idNumber = document.querySelector('table tr:last-child td:nth-of-type(1)') // TODO Бери данные из arr
-	const newObj = {id: parseInt(idNumber.textContent) + 1}
+    const newObj = {id: parseInt(idNumber.textContent) + 1}
     for(let i = 0; i < fields.length; i++){
         newObj[fields[i].name] = fields[i].value
     }
@@ -102,7 +108,7 @@ const addData = e => {
 //Сортировка
 
 const sortIncrease = (field, fieldName) => {
-	arr.sort((a, b) => a[fieldName] > b[fieldName] ? 1 : -1);
+    arr.sort((a, b) => a[fieldName] > b[fieldName] ? 1 : -1);
     basicData(arr);
     field.querySelector(".increase").style.display = "none"
     field.querySelector(".degrease").style.display = "inline"
@@ -118,25 +124,33 @@ const sortDegrease = (field, fieldName) => {
 //Удаление ряда
 const deleteRow = () => {
     const newArr = arr.filter(f => (f.isChecked !== true));
-
     basicData(newArr);
 }
 
 //Редактирование ряда
 const editRow = () => {
+    buttonSave.disabled = false;
+    
     for (let i = 0; i < arr.length; i++){
+        const tdAll = document.querySelectorAll('td');
+        let newObj = {id: '', name: '', description: '', info1: '', info2: ''};
         if(arr[i].isChecked == true){
-            const allTd = document.querySelectorAll('td');
-            for(let j = (6 * i); j <= ((i + 1) * 6 - 2); j ++){
+            for(j = i * 6; j <= 6 * i + 4; j ++){
                 let input = document.createElement("input");
-                input.value = allTd[j].innerHTML;
-                allTd[j].innerHTML = '';
-                allTd[j].append(input);
-
-                input.addEventListener("blur", () => {
-                    allTd[j].innerHTML = input.value;
-                })
+                input.value = tdAll[j].innerHTML;
+                tdAll[j].innerHTML = '';
+                tdAll[j].append(input);
+                    for(k = 0; k < newObj.length; k++){
+                        newObj[k].append(tdAll[j])
+                    }
+                
+                arr[i] = newObj
             }
+            //Object.keys(arr[i]).map((obj, key) => {
+            //    console.log(arr[i][obj])
+                                              
+            //})
+                buttonSave.addEventListener("click", basicData(arr))
         }
     }
 }
