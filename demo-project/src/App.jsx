@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Nested from './Nested'
 import ArrayManager from './ArrayManager'
+import Checkbox from './ui/Checkbox'
 
 const arr = ["dDASD", "ASDASD"]
 
@@ -21,7 +22,6 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
           {count}
         </p>
@@ -39,17 +39,7 @@ function App() {
         >
           Learn React
         </a>
-        <Nested
-          count={count}
-          iterator={iterator}
-          setCount={setCount}
-          setIterator={setIterator}
-          classes="bg"
-          style={{color : 'red'}}
-          text="test"
-        >
-          HELLO WORLD!
-        </Nested>
+        <Checkbox/>
       </header>
     </div>
   );
