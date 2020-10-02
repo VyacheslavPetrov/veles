@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import './App.css';
 import Table from './components/table'
 import Form from './components/form'
+import Edit from './components/edit'
 
 function App() {
   const [tableData, setTableData] = useState([])
@@ -14,6 +15,7 @@ function App() {
       <main>
         <Form/>
         <Table data={tableData}/>
+        <Edit />
       </main>
 
     </div>

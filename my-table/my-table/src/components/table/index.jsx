@@ -35,6 +35,7 @@ const Table = ({data}) => {
 
         return <tr key={key}>{
 
+
         }
         </tr>
       })}

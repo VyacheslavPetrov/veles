@@ -1,0 +1,29 @@
+.options {
+
+    display: flex;
+
+}
+
+.find {
+    width: 50%;
+    margin-right: 0;
+}
+
+form button {
+    height: 100%;
+}
+
+.options button {
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-right: 2%;
+    font-size: 15px;
+}
+
+img {
+    height: 15px;
+    width: 15px;
+    margin-right: 5px;
+}
+
