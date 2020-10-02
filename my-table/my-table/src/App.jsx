@@ -6,6 +6,11 @@ import Edit from './components/edit'
 
 function App() {
   const [tableData, setTableData] = useState([])
+  const [name, setName] = useState('')
+  const [description, setDescription] = useState('')
+
+  const fields = {name, description}
+  const handleEvents = {setName, setDescription}
 
   return (
     <div id="app">
@@ -13,8 +18,8 @@ function App() {
         <h3>Список чего-либо</h3>
       </header>
       <main>
-        <Form/>
-        <Table data={tableData}/>
+        <Form {...handleEvents} {...fields}/>
+        <Table/>
         <Edit />
       </main>
 
