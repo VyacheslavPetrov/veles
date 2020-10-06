@@ -1,21 +1,14 @@
 import React from 'react'
 import './style.css'
 
-const tableMockUp = [
-  {"id": 1, "name": "Anya", "description": "description", "info1": "info", "info2": "info", "isChecked" : false},
-  {"id": 2, "name": "Petya", "description": "description", "info1": "info", "info2": "info", "isChecked" : false},
-  {"id": 3, "name": "Stepan", "description": "description", "info1": "info", "info2": "info", "isChecked" : false},
-  {"id": 4, "name": "Vova", "description": "description", "info1": "info", "info2": "info", "isChecked" : false},
-  {"id": 5, "name": "Vasya", "description": "description", "info1": "info", "info2": "info", "isChecked" : false}
-]
 
-const Table = ({data = tableMockUp}) => {
+const Table = ({data, handleSortById}) => {
 
   return (
     <table className="info-table">
       <thead>
       <tr>
-        <th className="id">
+        <th className="id" onClick={handleSortById}>
           id
           <span className="increase">&#8593;</span> <span className="degrease">&#8595; </span>
         </th>

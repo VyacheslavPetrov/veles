@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Form = ({name, description, setDescription, setName}) => {
+const Form = ({name, description, info1, info2, setDescription, setName, setInfo1, setInfo2, handleAddData}) => {
 
   return (
     <div className="add">
@@ -18,10 +18,26 @@ const Form = ({name, description, setDescription, setName}) => {
         value={description}
         onChange={e => setDescription(e.target.value)}
       />
-      <input type="text" name="info1" placeholder="add info 1" />
-      <input type="text" name="info2" placeholder="info 2" />
+      <input
+        type="text"
+        name="info1"
+        placeholder="add info 1"
+        value={info1}
+        onChange={e => setInfo1(e.target.value)}
+      />
+      <input
+        type="text"
+        name="info2"
+        placeholder="info2"
+        value={info2}
+        onChange={e => setInfo2(e.target.value)}
+      />
       <div className="btn">
-        <button type="button">Добавить</button>
+        <button
+          disabled={!name || !description || !info1 || !info2}
+          type="button"
+          onClick={handleAddData}
+        >Добавить</button>
       </div>
     </div>
   )
