@@ -23,11 +23,25 @@ function App() {
     setTableData(tableData.concat([{id: tableData.length+1, name: name, description: description, info1: info1, info2: info2, isChecked: false}]))
   }, [tableData.length, name, description, info1, info2])
 
-  const handleSortById = () => {
-    const sorted = [...tableData].sort((a, b) => b.id - a.id);
+  const handleSortDegrease = (field) => {
+    const sorted = [...tableData].sort((a, b) => {
+      if(a[field] < b[field]){
+        return -1
+      } else if(a[field] > b[field]){
+        return 1
+      } else {
+        return 0
+      }
+    });
     setTableData(sorted)
   }
 
+  const handleSortIncrease = (field) => {
+    const sorted = [...tableData].sort((a, b) => b[field] - a[field]);
+    setTableData(sorted)
+  }
+
+  const sorts = {handleSortDegrease, handleSortIncrease}
   const fields = {name, description, info1, info2}
   const handleEvents = {setName, setDescription, setInfo1, setInfo2, handleAddData}
 
@@ -38,7 +52,7 @@ function App() {
       </header>
       <main>
         <Form {...handleEvents} {...fields}/>
-        <Table data={tableData} handleSortById={handleSortById}/>
+        <Table data={tableData} {...sorts} />
         <Edit />
       </main>
     </div>
