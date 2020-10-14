@@ -37,7 +37,9 @@ const Table = ({data, handleSortDegrease, handleSortIncrease}) => {
           <span
             className="degrease"
             name="id"
-            onClick={e => handleDegreaseSort(e.target.getAttribute('name'))}
+            onClick={(e) => {
+              handleDegreaseSort(e.target.getAttribute('name'))
+            }}
             style={increaseField === 'id' ? {display : 'inline'}: {display : 'none'}}
           >
             &#8595;
@@ -48,15 +50,18 @@ const Table = ({data, handleSortDegrease, handleSortIncrease}) => {
           <span
             className="increase"
             name="name"
-            onClick={(e) => handleIncreaseSort(e.target.getAttribute('name'))}
-            style={increaseField === 'name' ? {display : 'inline'}: {}}
+            onClick={(e) => {
+              handleIncreaseSort(e.target.getAttribute('name'))
+            }}
+            style={degreaseField === 'name' ? {display : 'inline'}: {}}
           >
             &#8593;
           </span>
           <span
             className="degrease"
-            onClick={handleSortDegrease}
-            style={degreaseField === 'name' ? {display : 'inline'}: {display : 'none'}}
+            name="name"
+            onClick={e => handleDegreaseSort(e.target.getAttribute('name'))}
+            style={increaseField === 'name' ? {display : 'inline'}: {display : 'none'}}
           >
             &#8595;
           </span>
@@ -67,14 +72,15 @@ const Table = ({data, handleSortDegrease, handleSortIncrease}) => {
             className="increase"
             name="description"
             onClick={(e) => handleIncreaseSort(e.target.getAttribute('name'))}
-            style={increaseField === 'description' ? {display : 'inline'}: {}}
+            style={degreaseField === 'description' ? {display : 'inline'}: {}}
           >
             &#8593;
           </span>
           <span
             className="degrease"
-            onClick={handleSortDegrease}
-            style={degreaseField === 'description' ? {display : 'inline'}: {display : 'none'}}
+            name="description"
+            onClick={e => handleDegreaseSort(e.target.getAttribute('name'))}
+            style={increaseField === 'description' ? {display : 'inline'}: {display : 'none'}}
           >
             &#8595;
           </span>
@@ -85,14 +91,15 @@ const Table = ({data, handleSortDegrease, handleSortIncrease}) => {
             className="increase"
             name="info1"
             onClick={(e) => handleIncreaseSort(e.target.getAttribute('name'))}
-            style={increaseField === 'info1' ? {display : 'inline'}: {}}
+            style={degreaseField === 'info1' ? {display : 'inline'}: {}}
           >
             &#8593;
           </span>
           <span
             className="degrease"
-            onClick={handleSortDegrease}
-            style={degreaseField === 'info1' ? {display : 'inline'}: {display : 'none'}}
+            name="info1"
+            onClick={e => handleDegreaseSort(e.target.getAttribute('name'))}
+            style={increaseField === 'info1' ? {display : 'inline'}: {display : 'none'}}
           >
             &#8595;
           </span>
@@ -103,14 +110,15 @@ const Table = ({data, handleSortDegrease, handleSortIncrease}) => {
             className="increase"
             name="info2"
             onClick={(e) => handleIncreaseSort(e.target.getAttribute('name'))}
-            style={increaseField === 'info2' ? {display : 'inline'}: {}}
+            style={degreaseField === 'info2' ? {display : 'inline'}: {}}
           >
             &#8593;
           </span>
           <span
             className="degrease"
-            onClick={handleSortDegrease}
-            style={degreaseField === 'info2' ? {display : 'inline'}: {display : 'none'}}
+            name="info2"
+            onClick={e => handleDegreaseSort(e.target.getAttribute('name'))}
+            style={increaseField === 'info2' ? {display : 'inline'}: {display : 'none'}}
           >
             &#8595;
           </span>

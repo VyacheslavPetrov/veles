@@ -138,19 +138,6 @@ const editRow = () => {
         const tdAll = document.querySelectorAll('td');
         let newObj = {id: '', name: '', description: '', info1: '', info2: ''};
         if(arr[i].isChecked == true){
-<<<<<<< HEAD
-            for(j = i * 6; j <= 6 * i + 4; j ++){
-                let input = document.createElement("input");
-                input.value = tdAll[j].innerHTML;
-                tdAll[j].innerHTML = '';
-                tdAll[j].append(input);
-                    for(k = 0; k < newObj.length; k++){
-                        newObj[k].append(tdAll[j])
-                    }
-                
-                arr[i] = newObj
-=======
-
             Object.keys(arr[i]).map((obj, key) => {
                 console.log(arr[i][obj])
             })
@@ -166,7 +153,6 @@ const editRow = () => {
                 input.addEventListener("blur", () => {
                     allTd[j].innerHTML = input.value; // не правильно
                 })
->>>>>>> e54295382ca83180c05ce6025b4918448b93ec0c
             }
             //Object.keys(arr[i]).map((obj, key) => {
             //    console.log(arr[i][obj])
