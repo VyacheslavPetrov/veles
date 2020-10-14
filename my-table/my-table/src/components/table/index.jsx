@@ -1,6 +1,5 @@
-import React,{useState, useCallback} from 'react'
+import React,{useState, useCallback, memo} from 'react'
 import './style.css'
-
 
 const Table = ({data, handleSortDegrease, handleSortIncrease}) => {
   const [increaseField, setIncreaseField] = useState('')
@@ -129,7 +128,7 @@ const Table = ({data, handleSortDegrease, handleSortIncrease}) => {
       <tbody>
       {data.map((fields, key) => <tr key={key}>
         {Object.keys(fields).map((item, key) => {
-          return <td key={key}>{fields[item]}</td>
+          return item === "isChecked" ? <td><input type="checkbox"/></td> : <td key={key}>{fields[item]}</td>
         })}
       </tr>
       )}
@@ -138,4 +137,18 @@ const Table = ({data, handleSortDegrease, handleSortIncrease}) => {
   )
 }
 
-export default Table
+function areEqual(prevProps, nextProps) {
+  /*
+  возвращает true, если nextProps рендерит
+  тот же результат что и prevProps,
+  иначе возвращает false
+  */
+
+  if(prevProps.data && JSON.stringify(prevProps.data) === JSON.stringify(nextProps.data)){
+    return true
+  } else {
+    return false
+  }
+}
+
+export default memo(Table, areEqual);

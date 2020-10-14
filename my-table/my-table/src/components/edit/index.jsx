@@ -1,10 +1,9 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './style.css'
 import DelImg from './img/delete.png'
 import EditImg from './img/edit.png'
 
-
-const Edit = ({tableData, tableSearch, setTableData, setTableSearch}) => {
+const Edit = ({data, setFilterTableData}) => {
 
   return (
     <div className="options">
@@ -17,12 +16,13 @@ const Edit = ({tableData, tableSearch, setTableData, setTableSearch}) => {
           placeholder="Найти"
           className="find"
           id="search-text"
-          value={tableSearch}
           onChange={e => {
-            const tableValue = setTableSearch(e.target.value)
-            tableData.filter(f => {
-              return f.indexOf(tableValue) > -1
+            const tableValue = e.target.value
+            const filterData = [...data].filter(f => {
+              return f['name'].indexOf(tableValue) > -1
             })
+
+            filterData && filterData.length ? setFilterTableData(filterData) : setFilterTableData(null)
           }}
         />
       </form>

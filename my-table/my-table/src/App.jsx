@@ -1,4 +1,4 @@
-import React,{useState, useCallback, useEffect} from 'react';
+import React,{useState, useCallback, useMemo} from 'react';
 import './App.css';
 import Table from './components/table'
 import Form from './components/form'
@@ -14,11 +14,12 @@ const tableMockUp = [
 
 function App() {
   const [tableData, setTableData] = useState(tableMockUp)
+  const [filterTableData, setFilterTableData] = useState(null)
+
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [info1, setInfo1] = useState('')
   const [info2, setInfo2] = useState('')
-  const [tableSearch, setTableSearch] = useState('')
 
   const handleAddData = useCallback(() => {
     setTableData(tableData.concat([{id: tableData.length+1, name: name, description: description, info1: info1, info2: info2, isChecked: false}]))
@@ -47,9 +48,11 @@ function App() {
         return 0
       }
     });
+
     setTableData(sorted)
   }
 
+  //const getTableData = useMemo(() => tableData, [tableData.length])
 
   /*const handleSortIncrease = (field) => {
     const sorted = [...tableData].sort((a, b) => b[field] - a[field]);
@@ -67,8 +70,8 @@ function App() {
       </header>
       <main>
         <Form {...handleEvents} {...fields}/>
-        <Table data={tableData} {...sorts} />
-        <Edit tableSearch={tableSearch} setTableSearch={setTableSearch}/>
+        <Table data={filterTableData ? filterTableData : tableData} {...sorts} />
+        <Edit data={tableData} setTableData={setTableData} setFilterTableData={setFilterTableData}/>
       </main>
     </div>
   );
