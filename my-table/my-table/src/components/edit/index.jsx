@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './style.css'
 import DelImg from './img/delete.png'
 import EditImg from './img/edit.png'
@@ -21,12 +21,11 @@ const Edit = ({data, setFilterTableData}) => {
             const filterData = [...data].filter(f => {
               return f['name'].indexOf(tableValue) > -1
             })
-
             filterData && filterData.length ? setFilterTableData(filterData) : setFilterTableData(null)
           }}
         />
       </form>
-      <button className="del" disabled="disabled">
+      <button className="del" disabled={true}>
         <img src={DelImg}/> Удалить
       </button>
     </div>

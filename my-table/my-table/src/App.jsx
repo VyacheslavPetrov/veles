@@ -21,6 +21,7 @@ function App() {
   const [info1, setInfo1] = useState('')
   const [info2, setInfo2] = useState('')
 
+
   const handleAddData = useCallback(() => {
     setTableData(tableData.concat([{id: tableData.length+1, name: name, description: description, info1: info1, info2: info2, isChecked: false}]))
   }, [tableData.length, name, description, info1, info2])
