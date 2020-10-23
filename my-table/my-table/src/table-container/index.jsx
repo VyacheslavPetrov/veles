@@ -20,6 +20,9 @@ function TableContainer() {
   const [info1, setInfo1] = useState('')
   const [info2, setInfo2] = useState('')
 
+  const [valueType, setAddrtype] = useState(["id", "name", "description", "info1", "info2"])
+  const handleAddrTypeChange = (e) => (valueType[e.target.value])
+
   const handleAddData = useCallback(() => {
     setTableData(tableData.concat([{id: tableData.length+1, name: name, description: description, info1: info1, info2: info2, isChecked: false}]))
   }, [tableData.length, name, description, info1, info2])
@@ -71,6 +74,11 @@ function TableContainer() {
         <Form {...handleEvents} {...fields}/>
         <Table data={filterTableData ? filterTableData : tableData} {...sorts} />
         <Edit data={tableData} setTableData={setTableData} setFilterTableData={setFilterTableData}/>
+        <select
+          onChange={e => handleAddrTypeChange(e)}
+          className="custom-select">
+          {valueType.map((value, key) => <option key={key}>{value}</option>)}          }
+        </select>
       </main>
     </>
   );
