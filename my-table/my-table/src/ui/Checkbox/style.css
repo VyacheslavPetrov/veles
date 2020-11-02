@@ -1,0 +1,16 @@
+.checkbox-container {
+    margin: 10px;
+    display: flex;
+}
+
+.checkbox-square {
+    margin-top: 5px;
+    margin-right: 5px;
+    width: 16px;
+    height: 16px;
+    border: 1px solid black;
+}
+
+.checkbox-label {
+    margin-top: 5px;
+}

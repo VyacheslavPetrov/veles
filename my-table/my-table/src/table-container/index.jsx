@@ -1,4 +1,4 @@
-import React,{useState, useCallback} from 'react';
+import React,{useState, useCallback, useEffect} from 'react';
 import Table from './table'
 import Form from './form'
 import Edit from './edit'
@@ -20,11 +20,17 @@ function TableContainer() {
   const [info1, setInfo1] = useState('')
   const [info2, setInfo2] = useState('')
 
-  const [valueType, setAddrtype] = useState(["id", "name", "description", "info1", "info2"])
-  const handleAddrTypeChange = (e) => (valueType[e.target.value])
-
+  useEffect(() => {
+    const persistTable = JSON.parse(window.localStorage.getItem("table"))
+    setTableData(persistTable)
+    return () => {
+      console.log('12')
+    }
+    }, [])
   const handleAddData = useCallback(() => {
-    setTableData(tableData.concat([{id: tableData.length+1, name: name, description: description, info1: info1, info2: info2, isChecked: false}]))
+    const newTable = tableData.concat([{id: tableData.length+1, name: name, description: description, info1: info1, info2: info2, isChecked: false}])
+    setTableData(newTable)
+    window.localStorage.setItem("table", JSON.stringify(newTable))
   }, [tableData.length, name, description, info1, info2])
 
   const handleSortDegrease = (field) => {
@@ -74,11 +80,6 @@ function TableContainer() {
         <Form {...handleEvents} {...fields}/>
         <Table data={filterTableData ? filterTableData : tableData} {...sorts} />
         <Edit data={tableData} setTableData={setTableData} setFilterTableData={setFilterTableData}/>
-        <select
-          onChange={e => handleAddrTypeChange(e)}
-          className="custom-select">
-          {valueType.map((value, key) => <option key={key}>{value}</option>)}          }
-        </select>
       </main>
     </>
   );

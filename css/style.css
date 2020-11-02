@@ -433,7 +433,9 @@ header h2 {
     width: 766px;
     height: 170px;
     margin-top: 67px;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-left: 34px;
     overflow:hidden;
     background-image: url("../img/img for desktop/david-hofmann-588877-unsplash.png");
@@ -445,7 +447,7 @@ header h2 {
     font-family: Raleway;
     font-style: normal;
     font-weight: 500;
-    font-size: 20px;
+    font-size: 25px;
     line-height: 23px;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -569,7 +571,7 @@ footer p {
 
 
 
-@media screen and (min-width: 1280px) {
+@media screen and (max-width: 1280px) {
     body {
         display: flex;
         flex-direction: column;
