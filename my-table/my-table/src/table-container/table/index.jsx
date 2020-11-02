@@ -126,9 +126,9 @@ const Table = ({data, handleSortDegrease, handleSortIncrease}) => {
       </tr>
       </thead>
       <tbody>
-      {data.map((fields, key) => <tr key={key}>
+      {data && data.length && data.map((fields, key) => <tr key={key}>
         {Object.keys(fields).map((item, key) => {
-          return item === "isChecked" ? <td><input type="checkbox" /></td> : <td key={key}>{fields[item]}</td>
+          return item === "isChecked" ? <td key={key}><input type="checkbox" /></td> : <td key={key}>{fields[item]}</td>
         })}
       </tr>
       )}

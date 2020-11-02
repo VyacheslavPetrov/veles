@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './style.css'
 import DelImg from './img/delete.png'
 import EditImg from './img/edit.png'
+import Modal from "../../ui/Modal"
 
 const Edit = ({data, setFilterTableData}) => {
 
@@ -28,6 +29,9 @@ const Edit = ({data, setFilterTableData}) => {
       <button className="del" disabled={true}>
         <img src={DelImg}/> Удалить
       </button>
+      <Modal>
+        <span>HELLO WORLD!!!</span>
+      </Modal>
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const Form = ({name, description, info1, info2, setDescription, setName, setInfo1, setInfo2, handleAddData}) => {
 
   return (
@@ -39,6 +40,7 @@ const Form = ({name, description, info1, info2, setDescription, setName, setInfo
           onClick={handleAddData}
         >Добавить</button>
       </div>
+
     </div>
   )
 }

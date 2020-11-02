@@ -22,16 +22,14 @@ function TableContainer() {
 
   useEffect(() => {
     const persistTable = JSON.parse(window.localStorage.getItem("table"))
-    setTableData(persistTable)
-    return () => {
-      console.log('12')
-    }
-    }, [])
+    if(persistTable) setTableData(persistTable)
+  }, [])
+
   const handleAddData = useCallback(() => {
     const newTable = tableData.concat([{id: tableData.length+1, name: name, description: description, info1: info1, info2: info2, isChecked: false}])
     setTableData(newTable)
     window.localStorage.setItem("table", JSON.stringify(newTable))
-  }, [tableData.length, name, description, info1, info2])
+  }, [tableData, name, description, info1, info2])
 
   const handleSortDegrease = (field) => {
     const sorted = [...tableData].sort((a, b) => {

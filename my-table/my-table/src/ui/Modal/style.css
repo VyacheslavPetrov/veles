@@ -1,0 +1,22 @@
+#modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal {
+    padding: 20px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    background: rgba(200, 150, 200, 1);
+    position: absolute;
+    top:50%;
+    left:50%;
+}
+
+.modal > span:first-child {
+    position: absolute;
+    top: 5px;
+    right: 7px;
+    cursor: pointer;
+}
