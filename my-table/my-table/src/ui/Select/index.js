@@ -1,7 +1,47 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import ReactDOM from 'react-dom'
 import './style.css'
 
-function Select({items = []}) {
+const selectElement = document.getElementById('select-modal')
+const element = document.createElement('div')
+
+function getCoords(elem) {
+  const box = elem.getBoundingClientRect()
+  return {
+    top: box.top + window.pageYOffset + elem.clientHeight,
+    bottom: box.bottom + window.pageYOffset,
+    left: box.left + window.pageXOffset,
+    width: box.width,
+    height: box.height
+  }
+}
+
+const SelectModal = ({children, defaultOpen = false}) => {
+  const [isSelectOpen, setIsSelectOpen] = useState(defaultOpen)
+
+  useEffect(() => {
+    selectElement.appendChild(element)
+    return () => {
+      selectElement.removeChild(element)
+      element.remove()
+    }
+  },[])
+
+  return (
+    <div className="select__container">
+      <span className="select-span" onClick={() => setIsSelectOpen(!isSelectOpen)}>Выборг</span>
+      {isSelectOpen && ReactDOM.createPortal(
+        <div className="select" >
+          <span onClick={() => setIsSelectOpen(false)} />
+          {children}
+        </div>,
+        element
+      )}
+    </div>
+  )
+}
+
+{/*function Select({items = []}) {
 
   const [activeItem, setActiveItem] = useState(items.filter(f => f.selected === true)[0])
   const [isOpen, setIsOpen] = useState(false)
@@ -10,6 +50,7 @@ function Select({items = []}) {
     <span className="select-container">
       <div onClick={() => setIsOpen(!isOpen)}>{activeItem.text}</div>
       <div className="options-container" style={{display: isOpen ? "flex" : "none" }}>
+
         {items.map((option, key) =>
         <span
           style={{backgroundColor: option.disabled ? "red" : "transparent"}}
@@ -23,6 +64,6 @@ function Select({items = []}) {
       </div>
     </span>
   );
-}
+}*/}
 
-export default Select
+export default SelectModal
