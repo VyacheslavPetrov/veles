@@ -7,7 +7,8 @@ import Modal from "./ui/Modal";
 import SelectModal from "./ui/Select";
 import Checkbox from "./ui/Checkbox";
 import RadioButton from "./ui/RadioButton";
-
+import {MaterialRadioButton} from "./ui/RadioButton";
+import SwitchButton from "./ui/Switch"
 function App() {
 
   return (
@@ -23,11 +24,17 @@ function App() {
             <span>Санкт-Петербург</span>
             <span>Москва</span>
           </SelectModal>
-          <Checkbox />
-          <RadioButton items={["Радиокнопка-2", "Радиокнопка-1"]}/>
+
+
           <Modal>
-            <span>HELLO WORLD!!!</span>
+            <div>
+              <Checkbox />
+              <RadioButton items={["Радиокнопка-2", "Радиокнопка-1"]} />
+
+            </div>
           </Modal>
+          <SwitchButton switchArr = {[{defaultChecked: true, colorOnChecked: "red", disabled: false, size: "large"},
+          {defaultChecked: false, colorOnChecked: "yellow", disabled: true, size: "medium"}]} />
         </Route>
       </Switch>
     </div>

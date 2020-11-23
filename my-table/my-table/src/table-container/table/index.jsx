@@ -1,7 +1,9 @@
 import React,{useState, useCallback, memo} from 'react'
 import './style.css'
 
-const Table = ({data, handleSortDegrease, handleSortIncrease}) => {
+
+
+const Table = ({data, handleSortDegrease, handleSortIncrease, checkArray, setCheckArray}) => {
   const [increaseField, setIncreaseField] = useState('')
   const [degreaseField, setDegreaseField] = useState('')
 
@@ -16,6 +18,8 @@ const Table = ({data, handleSortDegrease, handleSortIncrease}) => {
     setDegreaseField(field)
     setIncreaseField('')
   }, [increaseField, degreaseField, handleSortIncrease])
+
+
 
   return (
     <table className="info-table">
@@ -126,9 +130,18 @@ const Table = ({data, handleSortDegrease, handleSortIncrease}) => {
       </tr>
       </thead>
       <tbody>
-      {data && data.length && data.map((fields, key) => <tr key={key}>
+      {data && data.length && data.map((fields, fieldKey) => <tr key={fieldKey}>
         {Object.keys(fields).map((item, key) => {
-          return item === "isChecked" ? <td key={key}><input type="checkbox" /></td> : <td key={key}>{fields[item]}</td>
+          return item === "isChecked" ? <td key={key}>
+            <input type="checkbox" checked={checkArray.includes(fieldKey)} onClick={
+              (event)=>{
+                if (event.target.checked) {
+                  setCheckArray(()=> [...checkArray].concat([fieldKey]))
+                } else {
+                  setCheckArray(()=> [...checkArray].filter(f=> f !== fieldKey))
+                }
+              }
+          }/></td> : <td key={key}>{fields[item]}</td>
         })}
       </tr>
       )}
@@ -151,4 +164,4 @@ function areEqual(prevProps, nextProps) {
   }
 }
 
-export default memo(Table, areEqual);
+export default Table;

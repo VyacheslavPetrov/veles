@@ -8,7 +8,7 @@ const element = document.createElement('div')
 function getCoords(elem) {
   const box = elem.getBoundingClientRect()
   return {
-    top: box.top + window.pageYOffset + elem.clientHeight,
+    top: box.top + window.pageYOffset + elem.clientHeight + box.height,
     bottom: box.bottom + window.pageYOffset,
     left: box.left + window.pageXOffset,
     width: box.width,
@@ -19,6 +19,7 @@ function getCoords(elem) {
 const SelectModal = ({children, defaultOpen = false}) => {
   const [isSelectOpen, setIsSelectOpen] = useState(defaultOpen)
 
+
   useEffect(() => {
     selectElement.appendChild(element)
     return () => {
@@ -26,12 +27,19 @@ const SelectModal = ({children, defaultOpen = false}) => {
       element.remove()
     }
   },[])
+  let leftPos = 0, topPos = 0
+  const el = document.querySelector('.select-span')
+  if (el) {
+    const {left, top} = getCoords(el)
+    leftPos = left
+    topPos = top
+  }
 
   return (
     <div className="select__container">
-      <span className="select-span" onClick={() => setIsSelectOpen(!isSelectOpen)}>Выборг</span>
+      <span className="select-span" onClick={() => setIsSelectOpen(!isSelectOpen)} >Выборг</span>
       {isSelectOpen && ReactDOM.createPortal(
-        <div className="select" >
+        <div className="select" style={{left: leftPos, top: topPos}}>
           <span onClick={() => setIsSelectOpen(false)} />
           {children}
         </div>,

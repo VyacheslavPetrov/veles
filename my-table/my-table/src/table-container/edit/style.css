@@ -27,3 +27,31 @@ img {
     margin-right: 5px;
 }
 
+.pagination {
+    display: flex;
+    margin-top: 30px;
+    justify-content: space-around;
+}
+
+.pagination > div {
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 50%;
+    display: none;
+
+}
+
+.pagination > div:first-child {
+    display: inline;
+}
+
+.pagination > div:last-child {
+    display: inline;
+}
+
+.pagination > div[value=true],
+.pagination > div[data-content=true],
+.pagination > div[value=true]+div {
+    display: inline;
+
+}
