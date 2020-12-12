@@ -4,19 +4,23 @@
     align-items: center;
 }
 
-.modal {
+.modal-2 {
     padding: 20px;
-    border: 1px solid #000;
+    border: 1px solid black;
     border-radius: 5px;
-    background: rgba(200, 150, 200, 1);
     position: absolute;
-    top:50%;
-    left:50%;
+    top:20%;
+    left:30%;
 }
 
 .modal > span:first-child {
     position: absolute;
-    top: 5px;
-    right: 7px;
     cursor: pointer;
+}
+
+button {
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: transparent;
 }

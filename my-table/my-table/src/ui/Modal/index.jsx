@@ -18,7 +18,7 @@ const Modal = ({children, defaultOpen = false}) => {
 
   return(
     <div className="modal__container">
-      <button onClick={() => setIsOpenModal(!isOpen)}>Open</button>
+      <button onClick={() => setIsOpenModal(!isOpen)}></button>
       {isOpen && ReactDOM.createPortal(
         <div className="modal">
           <span onClick={() => setIsOpenModal(false)}>X</span>

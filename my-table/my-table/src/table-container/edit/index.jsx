@@ -5,7 +5,7 @@ import EditImg from './img/edit.png'
 import Modal from "../../ui/Modal"
 import Responce from '../../response.json'
 import {fetchData} from '../index.jsx'
-
+import ClassNames from 'classnames'
 
 const Edit = ({data, setFilterTableData, checkArray, setCheckArray, setTableData}) => {
   const deleteFunc = () => {
@@ -56,11 +56,15 @@ export const Pagination = ({count, currentPosition, setCurrentPosition, setTable
 
     <div className="pagination">
       {createPaginationArray(pagesNumbers).map((item, key)=>{
+        const classes = ClassNames({
+          "active-item": item === currentPosition,
+          "visible-items": item === currentPosition - 1 || item === currentPosition + 1
+        })
+
         return(
           <div key={key}
-               value={item === currentPosition}
-               data-content={item === currentPosition -1}
-               style={item === currentPosition ? {backgroundColor: "Crimson", color: "white", border: "1px solid black"} : {}}
+
+               className={classes}
                onClick={() => setCurrentPosition(currentPosition => {
                  fetchData(currentPosition, count, setTableData, setAllCount)
                  return item
